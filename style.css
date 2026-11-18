@@ -1,11 +1,19 @@
 :root {
+  color-scheme: light dark;
+  --background: light-dark(#f5f7fb, #161b25);
+  --text: light-dark(#172033, #eef2fa);
+  --accent: light-dark(#254ca3, #aac5ff);
+  --surface: light-dark(#fff, #222b3b);
+  --muted: light-dark(#4b5563, #c2ccdc);
+  --disabled: light-dark(#e4e8ef, #343f53);
+}
+
+:root[data-theme="light"] {
   color-scheme: light;
-  --background: #f5f7fb;
-  --text: #172033;
-  --accent: #254ca3;
-  --surface: #fff;
-  --muted: #4b5563;
-  --disabled: #e4e8ef;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
 }
 
 body {
@@ -59,10 +67,11 @@ button {
 }
 
 button:disabled {
-  border-color: var(--disabled);
+  border-color: var(--muted);
   background: var(--disabled);
   color: var(--muted);
   cursor: default;
+  opacity: 1;
 }
 
 #status {

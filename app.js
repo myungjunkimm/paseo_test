@@ -85,3 +85,35 @@ pauseButton.addEventListener('click', pause);
 resetButton.addEventListener('click', reset);
 document.addEventListener('visibilitychange', tick);
 render();
+
+function initThemeToggle() {
+  const root = document.documentElement;
+  const toggle = document.querySelector('#theme-toggle');
+  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function isDarkTheme() {
+    return root.dataset.theme ? root.dataset.theme === 'dark' : systemTheme.matches;
+  }
+
+  function updateThemeToggle() {
+    toggle.setAttribute('aria-pressed', String(isDarkTheme()));
+  }
+
+  function toggleTheme() {
+    const theme = isDarkTheme() ? 'light' : 'dark';
+    root.dataset.theme = theme;
+    updateThemeToggle();
+
+    try {
+      localStorage.setItem('focus-timer-theme', theme);
+    } catch {
+      // Keep the override for this page when storage is unavailable.
+    }
+  }
+
+  toggle.addEventListener('click', toggleTheme);
+  systemTheme.addEventListener('change', updateThemeToggle);
+  updateThemeToggle();
+}
+
+initThemeToggle();
