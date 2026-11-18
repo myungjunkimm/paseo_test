@@ -4,6 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>집중 타이머</title>
+  <script>
+    function restoreTheme() {
+      try {
+        const theme = localStorage.getItem('focus-timer-theme');
+        if (theme === 'light' || theme === 'dark') {
+          document.documentElement.dataset.theme = theme;
+        }
+      } catch {
+        // Fall back to the system theme when storage is unavailable.
+      }
+    }
+
+    restoreTheme();
+  </script>
   <link rel="stylesheet" href="style.css">
   <script src="app.js" defer></script>
 </head>
@@ -17,6 +31,7 @@
       <button id="reset" type="button">초기화</button>
     </div>
     <p id="status" role="status"></p>
+    <button id="theme-toggle" type="button" aria-pressed="false">다크 모드</button>
   </main>
 </body>
 </html>
